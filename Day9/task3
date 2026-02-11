@@ -1,0 +1,13 @@
+import pandas as pd
+usernames = pd.Series([' Alice ', 'bOB', ' Charlie_Data ', 'daisy'])
+print("Original Usernames Series:")
+print(usernames)
+cleaned_usernames = usernames.str.strip()
+print("\nAfter Removing Whitespace:")
+print(cleaned_usernames)
+lower_usernames = cleaned_usernames.str.lower()
+print("\nAfter Converting to Lowercase:")
+print(lower_usernames)
+contains_a = lower_usernames.str.contains('a')
+print("\nNames Containing Letter 'a':")
+print(contains_a)
