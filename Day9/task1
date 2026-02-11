@@ -1,0 +1,9 @@
+import pandas as pd
+products = pd.Series([700, 150, 300], index=['Laptop', 'Mouse', 'Keyboard'])
+print("Full Products Series:")
+print(products)
+laptop_price = products['Laptop']
+print("\nPrice of Laptop:", laptop_price)
+first_two_products = products[:2]
+print("\nFirst two products (Positional Indexing):")
+print(first_two_products)
