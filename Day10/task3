@@ -1,0 +1,5 @@
+import pandas as pd
+
+df = pd.read_csv("customer_orders.csv")
+df["Location"] = df["Location"].astype(str).str.strip().str.title()
+print(df["Location"].unique())
