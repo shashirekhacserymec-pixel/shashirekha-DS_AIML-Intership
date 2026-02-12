@@ -1,0 +1,8 @@
+import pandas as pd
+df = pd.read_csv("customer_orders.csv")
+print("Data types BEFORE cleaning:")
+print(df.dtypes)
+df["Price"] = df["Price"].str.replace("$", "", regex=False).astype(float)
+df["Date"] = pd.to_datetime(df["Date"])
+print("\nData types AFTER cleaning:")
+print(df.dtypes)
