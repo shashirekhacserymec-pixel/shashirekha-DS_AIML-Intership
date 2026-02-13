@@ -1,0 +1,13 @@
+import matplotlib.pyplot as plt
+
+months = [1, 2, 3, 4, 5]
+revenue = [2000, 4500, 4000, 7500, 9000]
+
+plt.figure(figsize=(8,5))
+plt.plot(months, revenue, marker='o', linestyle='--')
+plt.title("Monthly Revenue Growth Analysis")
+plt.xlabel("Month")
+plt.ylabel("Revenue (USD)")
+plt.grid(True)
+
+plt.show()
