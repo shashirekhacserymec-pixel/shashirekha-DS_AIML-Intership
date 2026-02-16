@@ -1,0 +1,23 @@
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+df = pd.read_csv("customer_orders.csv")   
+print(df.columns)
+
+x_col = "SquareFootage"   
+y_col = "Price"           
+
+plt.figure(figsize=(8,5))
+plt.scatter(df[x_col], df[y_col])
+plt.xlabel(x_col)
+plt.ylabel(y_col)
+plt.title(f"Scatter Plot: {x_col} vs {y_col}")
+plt.show()
+cat_col = "City"     
+num_col = "Price"    
+
+plt.figure(figsize=(8,5))
+sns.boxplot(x=df[cat_col], y=df[num_col])
+plt.title(f"Boxplot of {num_col} by {cat_col}")
+plt.xticks(rotation=45)
+plt.show()
