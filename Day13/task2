@@ -1,0 +1,23 @@
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+df = pd.read_csv("customer_orders.csv")
+corr_matrix = df.corr(numeric_only=True)
+print("Correlation Matrix:")
+print(corr_matrix)
+plt.figure(figsize=(10, 8))
+sns.heatmap(corr_matrix, annot=True, cmap="coolwarm", fmt=".2f")
+plt.title("Correlation Heatmap")
+plt.show()
+print("\nHighly Correlated Variables (Correlation > 0.8):")
+
+for i in range(len(corr_matrix.columns)):
+    for j in range(i):
+        if abs(corr_matrix.iloc[i, j]) > 0.8:
+            print(corr_matrix.columns[i], "and", corr_matrix.columns[j],
+                  "=", corr_matrix.iloc[i, j])
+main_column = "Order_Amount"
+plt.figure(figsize=(6, 4))
+sns.boxplot(x=df[main_column])
+plt.title(f"Boxplot for Outliers in {main_column}")
+plt.show()
