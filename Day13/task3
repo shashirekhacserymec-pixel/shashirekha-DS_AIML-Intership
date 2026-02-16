@@ -1,0 +1,23 @@
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+df = pd.read_csv("students.csv")
+
+print("Columns:", df.columns)
+
+grade_map = {'A': 90, 'B': 75, 'C': 60, 'D': 50}
+df['Marks'] = df['Grade'].map(grade_map)
+num_col = "Marks"
+print("Numeric Column:", num_col)
+plt.figure(figsize=(8,5))
+sns.histplot(df[num_col], kde=True)
+plt.title(f"Histogram and KDE of {num_col}")
+plt.show()
+print("Skewness:", df[num_col].skew())
+print("Kurtosis:", df[num_col].kurtosis())
+cat_col = "Grade"
+
+plt.figure(figsize=(8,5))
+sns.countplot(x=df[cat_col])
+plt.title(f"Count Plot of {cat_col}")
+plt.show()
