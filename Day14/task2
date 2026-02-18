@@ -1,0 +1,44 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
+data = {
+    "Age": [22, 25, 47, 52, 46, 56, 55, 60],
+    "Salary": [15000, 18000, 65000, 72000, 68000, 80000, 85000, 90000]
+}
+
+df = pd.DataFrame(data)
+print("Original Data:\n", df)
+
+
+std_scaler = StandardScaler()
+df_standardized = pd.DataFrame(std_scaler.fit_transform(df), columns=df.columns)
+print("\nStandardized Data:\n", df_standardized)
+
+
+minmax_scaler = MinMaxScaler()
+df_normalized = pd.DataFrame(minmax_scaler.fit_transform(df), columns=df.columns)
+print("\nNormalized Data:\n", df_normalized)
+
+
+plt.figure(figsize=(12, 5))
+
+
+plt.subplot(1, 3, 1)
+plt.hist(df["Salary"])
+plt.title("Original Salary")
+plt.xlabel("Salary")
+plt.ylabel("Frequency")
+
+
+plt.subplot(1, 3, 2)
+plt.hist(df_standardized["Salary"])
+plt.title("Standardized Salary")
+plt.xlabel("Scaled Salary")
+
+plt.subplot(1, 3, 3)
+plt.hist(df_normalized["Salary"])
+plt.title("Normalized Salary")
+plt.xlabel("Scaled Salary (0 to 1)")
+
+plt.tight_layout()
+plt.show()
