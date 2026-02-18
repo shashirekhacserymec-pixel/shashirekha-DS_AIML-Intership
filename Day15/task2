@@ -1,0 +1,39 @@
+import random
+
+
+P_heads = 1/2
+P_six = 1/6
+
+P_independent = P_heads * P_six
+
+print("Independent Events:")
+print("P(Heads and 6) =", P_independent)
+print()
+
+
+
+P_red1 = 5/10          
+P_red2_given_red1 = 4/9  
+
+P_dependent = P_red1 * P_red2_given_red1
+
+print("Dependent Events:")
+print("P(Both marbles are Red) =", P_dependent)
+print()
+
+
+trials = 10000
+count_both_red = 0
+
+for _ in range(trials):
+    bag = ["R"]*5 + ["B"]*5
+    random.shuffle(bag)
+    
+    first = bag.pop()
+    second = bag.pop()
+    
+    if first == "R" and second == "R":
+        count_both_red += 1
+
+experimental_prob = count_both_red / trials
+print("Experimental Probability (Both Red) =", experimental_prob)
