@@ -1,0 +1,40 @@
+import sqlite3
+
+
+conn = sqlite3.connect("internship.db")
+cursor = conn.cursor()
+
+
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS interns (
+    id INTEGER PRIMARY KEY,
+    name TEXT,
+    track TEXT,
+    stipend INTEGER
+)
+""")
+
+
+interns_data = [
+    (1, "Amit", "Data Science", 8000),
+    (2, "Riya", "Web Development", 7000),
+    (3, "Shashi", "Data Science", 9000),
+    (4, "Kiran", "AI & ML", 10000),
+    (5, "Neha", "Cyber Security", 7500)
+]
+
+cursor.executemany("INSERT OR IGNORE INTO interns VALUES (?, ?, ?, ?)", interns_data)
+
+
+conn.commit()
+
+
+cursor.execute("SELECT name, track FROM interns")
+results = cursor.fetchall()
+
+print("Intern Name and Track:")
+for name, track in results:
+    print(name, "-", track)
+
+
+conn.close()
