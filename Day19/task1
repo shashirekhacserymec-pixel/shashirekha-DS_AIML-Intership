@@ -1,0 +1,52 @@
+import sqlite3
+
+
+conn = sqlite3.connect("internship.db")
+cursor = conn.cursor()
+
+
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS interns (
+    id INTEGER PRIMARY KEY,
+    name TEXT,
+    track TEXT,
+    stipend INTEGER
+)
+""")
+
+
+cursor.execute("DELETE FROM interns")  
+data = [
+    (1, "Rahul", "Data Science", 6000),
+    (2, "Asha", "Web Dev", 4500),
+    (3, "Kiran", "Data Science", 7000),
+    (4, "Meena", "AI", 8000),
+    (5, "John", "Web Dev", 5000)
+]
+cursor.executemany("INSERT INTO interns VALUES (?, ?, ?, ?)", data)
+
+conn.commit()
+
+
+print("=== Data Science interns with stipend > 5000 ===")
+cursor.execute("""
+SELECT * FROM interns
+WHERE track='Data Science' AND stipend > 5000
+""")
+print(cursor.fetchall())
+
+
+print("\n=== Average stipend per track ===")
+cursor.execute("""
+SELECT track, AVG(stipend) FROM interns GROUP BY track
+""")
+print(cursor.fetchall())
+
+
+print("\n=== Intern count per track ===")
+cursor.execute("""
+SELECT track, COUNT(*) FROM interns GROUP BY track
+""")
+print(cursor.fetchall())
+
+conn.close()
